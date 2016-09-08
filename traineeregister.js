@@ -1,32 +1,45 @@
+
 import React, { Component } from 'react';
-import { AppRegistry,ScrollView,View,Text,Image,Navigator,TouchableOpacity,StyleSheet} from 'react-native';
 
-var _navigator;
-var InstructwelcomeView = require('./instructwelcome.js');
-var TraineewelcomeView = require('./traineewelcome.js');
 
-// class PT extends React.Component {
-var PT = React.createClass({
-    getInitialState: function(){
-    return {};
+import {
+   Image,
+  View,
+  Text,
+  StyleSheet,
+  ViewPagerAndroid,
+  BackAndroid,
+  ScrollView,
+  TouchableOpacity,
+  navigator,
+} from 'react-native';
+
+BackAndroid.addEventListener('hardwareBackPress', function() {
+  if(_navigator == null){
+    return false;
+  }
+  if(_navigator.getCurrentRoutes().length === 1){
+    return false;
+  }
+  _navigator.pop();
+  return true;
+});
+
+var _navigator ;
+
+
+var TraineeregisterView = React.createClass({
+
+  getInitialState: function(){
+    _navigator = this.props.navigator;
+    return {
+
+    };
   },
 
-  configureScenceAndroid: function(){
-    return Navigator.SceneConfigs.FadeAndroid;
-  },
-
- renderSceneAndroid: function(route, navigator){
-    _navigator = navigator;
-    if(route.id === 'main'){
-      return (
-        // <View>
-
-        //   <TouchableOpacity onPress={() => _navigator.push({title:'instructwelcome',id:'instructwelcome'})} style={ styles.button }>
-        //     <Text>I am instructor</Text>
-        //   </TouchableOpacity>
-
-        // </View>
-         <ScrollView 
+  render: function(){
+    return (
+          <ScrollView 
         contentContainerStyle={{flex:1}}
         keyboardDismissMode='on-drag'
         keyboardShouldPersistTaps={false}
@@ -45,44 +58,17 @@ var PT = React.createClass({
             <View style={styles.choose}>
               <TouchableOpacity style={styles.btn}
               onPress={() => _navigator.push({title:'InstructwelcomeView',id:'instructwelcome'})}>
-              <Text style={styles.text}>I am Instructor</Text>
+              <Text style={styles.text}>vincent</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.btn}
-             onPress={() => _navigator.push({title:'TraineewelcomeView',id:'traineewelcome'})}>
-              <Text style={styles.text}> I am trainee</Text>
+             onPress={() => _navigator.push({title:'UserInfoView',id:'userinfo'})}>
+              <Text style={styles.text}> Login</Text>
               </TouchableOpacity>
             </View>
         </View>
       </ScrollView>
        );
     }
-
-    if(route.id === 'instructwelcome'){
-      return (
-        <InstructwelcomeView navigator={navigator} route={route} />
-       );
-    }
-    if(route.id === 'traineewelcome'){
-      return (
-        <TraineewelcomeView navigator={navigator} route={route}/>
-      );
-    }
-  
-
-  },
-
- render: function(){
-    var renderScene = this.renderSceneAndroid;
-    var configureScence = this.configureScenceAndroid;
-    return (
-      <Navigator
-        debugOverlay={false}
-        initialRoute={{ title: 'Main', id:'main'}}
-        configureScence={{ configureScence }}
-        renderScene={renderScene}/>
-   );
-  }
-
 });
 var styles = StyleSheet.create({
   container:{
@@ -136,4 +122,4 @@ var styles = StyleSheet.create({
   },
 });
 
-module.exports = PT
+module.exports = TraineeregisterView;

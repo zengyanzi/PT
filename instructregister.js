@@ -11,13 +11,8 @@ import {
   BackAndroid,
   ScrollView,
   TouchableOpacity,
-  Navigator,
+  navigator
 } from 'react-native';
-
-//navigation
-var _navigator;
-var InstructregisterView = require('./instructregister.js');
-var InstructloginView = require('./instructlogin.js');
 
 BackAndroid.addEventListener('hardwareBackPress', function() {
   if(_navigator == null){
@@ -33,7 +28,7 @@ BackAndroid.addEventListener('hardwareBackPress', function() {
 var _navigator ;
 
 
-var InstructwelcomeView = React.createClass({
+var InstructregisterView = React.createClass({
 
   getInitialState: function(){
     _navigator = this.props.navigator;
@@ -42,14 +37,7 @@ var InstructwelcomeView = React.createClass({
     };
   },
 
-  configureScenceAndroid: function(){
-    return Navigator.SceneConfigs.FadeAndroid;
-  },
-
-
- renderSceneAndroid: function(route, navigator){
-    _navigator = navigator;
-    if(route.id === 'instructwelcome'){
+  render: function(){
     return (
           <ScrollView 
         contentContainerStyle={{flex:1}}
@@ -63,17 +51,14 @@ var InstructwelcomeView = React.createClass({
           </View>
        </View>
        <View style={styles.maincontain}>
-         <Image
-              source={{uri: 'http://oss-hz.qianmi.com/qianmicom/u/cms/qmwww/201511/03102524l6ur.png'}}
-              style={styles.logo}/>
 
             <View style={styles.choose}>
               <TouchableOpacity style={styles.btn}
-              onPress={() => _navigator.push({title:'InstructregisterView',id:'instructregister'})}>
-              <Text style={styles.text}>Register</Text>
+              onPress={() => _navigator.push({title:'InstructwelcomeView',id:'instructwelcome'})}>
+              <Text style={styles.text}>vincent</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.btn}
-             onPress={() => _navigator.push({title:'InstructloginView',id:'instructlogin'})}>
+             onPress={() => _navigator.push({title:'UserInfoView',id:'userinfo'})}>
               <Text style={styles.text}> Login</Text>
               </TouchableOpacity>
             </View>
@@ -81,32 +66,6 @@ var InstructwelcomeView = React.createClass({
       </ScrollView>
        );
     }
-    if(route.id === 'instructregister'){
-      return (
-        <InstructregisterView navigator={navigator} route={route} />
-       );
-    }
-    if(route.id === 'instructlogin'){
-      return (
-        <InstructloginView navigator={navigator} route={route}/>
-      );
-    }
-  
-
-  },
-
- render: function(){
-    var renderScene = this.renderSceneAndroid;
-    var configureScence = this.configureScenceAndroid;
-    return (
-      <Navigator
-        debugOverlay={false}
-        initialRoute={{ title: 'instructwelcome', id:'instructwelcome'}}
-        configureScence={{ configureScence }}
-        renderScene={renderScene}/>
-   );
-  }
-
 });
 var styles = StyleSheet.create({
   container:{
@@ -156,8 +115,8 @@ var styles = StyleSheet.create({
   text:{
     fontWeight: 'bold',
     fontSize: 14,
-    color: '#FFF'
+    color: '#241003',
   },
 });
 
-module.exports = InstructwelcomeView;
+module.exports = InstructregisterView;

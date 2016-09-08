@@ -1,32 +1,57 @@
+
 import React, { Component } from 'react';
-import { AppRegistry,ScrollView,View,Text,Image,Navigator,TouchableOpacity,StyleSheet} from 'react-native';
 
+
+import {
+   Image,
+  View,
+  Text,
+  StyleSheet,
+  ViewPagerAndroid,
+  BackAndroid,
+  ScrollView,
+  TouchableOpacity,
+  Navigator,
+} from 'react-native';
+
+//navigation
 var _navigator;
-var InstructwelcomeView = require('./instructwelcome.js');
-var TraineewelcomeView = require('./traineewelcome.js');
+var TraineeregisterView = require('./traineeregister.js');
+var InstructloginView = require('./instructlogin.js');
 
-// class PT extends React.Component {
-var PT = React.createClass({
-    getInitialState: function(){
-    return {};
+BackAndroid.addEventListener('hardwareBackPress', function() {
+  if(_navigator == null){
+    return false;
+  }
+  if(_navigator.getCurrentRoutes().length === 1){
+    return false;
+  }
+  _navigator.pop();
+  return true;
+});
+
+var _navigator ;
+
+
+var TraineewelcomeView = React.createClass({
+
+  getInitialState: function(){
+    _navigator = this.props.navigator;
+    return {
+
+    };
   },
 
   configureScenceAndroid: function(){
     return Navigator.SceneConfigs.FadeAndroid;
   },
 
+
  renderSceneAndroid: function(route, navigator){
     _navigator = navigator;
-    if(route.id === 'main'){
-      return (
-        // <View>
-
-        //   <TouchableOpacity onPress={() => _navigator.push({title:'instructwelcome',id:'instructwelcome'})} style={ styles.button }>
-        //     <Text>I am instructor</Text>
-        //   </TouchableOpacity>
-
-        // </View>
-         <ScrollView 
+    if(route.id === 'traineewelcome'){
+    return (
+          <ScrollView 
         contentContainerStyle={{flex:1}}
         keyboardDismissMode='on-drag'
         keyboardShouldPersistTaps={false}
@@ -44,27 +69,26 @@ var PT = React.createClass({
 
             <View style={styles.choose}>
               <TouchableOpacity style={styles.btn}
-              onPress={() => _navigator.push({title:'InstructwelcomeView',id:'instructwelcome'})}>
-              <Text style={styles.text}>I am Instructor</Text>
+              onPress={() => _navigator.push({title:'TraineeregisterView',id:'traineeregister'})}>
+              <Text style={styles.text}>Register</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.btn}
-             onPress={() => _navigator.push({title:'TraineewelcomeView',id:'traineewelcome'})}>
-              <Text style={styles.text}> I am trainee</Text>
+             onPress={() => _navigator.push({title:'InstructloginView',id:'instructlogin'})}>
+              <Text style={styles.text}> Login</Text>
               </TouchableOpacity>
             </View>
         </View>
       </ScrollView>
        );
     }
-
-    if(route.id === 'instructwelcome'){
+    if(route.id === 'traineeregister'){
       return (
-        <InstructwelcomeView navigator={navigator} route={route} />
+        <TraineeregisterView navigator={navigator} route={route} />
        );
     }
-    if(route.id === 'traineewelcome'){
+    if(route.id === 'instructlogin'){
       return (
-        <TraineewelcomeView navigator={navigator} route={route}/>
+        <InstructloginView navigator={navigator} route={route}/>
       );
     }
   
@@ -77,7 +101,7 @@ var PT = React.createClass({
     return (
       <Navigator
         debugOverlay={false}
-        initialRoute={{ title: 'Main', id:'main'}}
+        initialRoute={{ title: 'traineewelcome', id:'traineewelcome'}}
         configureScence={{ configureScence }}
         renderScene={renderScene}/>
    );
@@ -136,4 +160,4 @@ var styles = StyleSheet.create({
   },
 });
 
-module.exports = PT
+module.exports = TraineewelcomeView;
