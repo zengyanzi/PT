@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { AppRegistry,ScrollView,View,Text,Image,Navigator,TouchableOpacity,StyleSheet} from 'react-native';
 
 var _navigator;
-var ShopView = require('./shop.android.js');
+var InstructwelcomeView = require('./instructwelcome.js');
+var UserInfoView = require('./userinfo.js');
 
 // class PT extends React.Component {
 var PT = React.createClass({
@@ -43,12 +44,12 @@ var PT = React.createClass({
 
             <View style={styles.choose}>
               <TouchableOpacity style={styles.btn}
-              onPress={() => _navigator.push({title:'shop',id:'shop'})}>
-              <Text style={styles.text}>Register</Text>
+              onPress={() => _navigator.push({title:'InstructwelcomeView',id:'instructwelcome'})}>
+              <Text style={styles.text}>I am Instructor</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.btn}
-              onPress={() => console.log('press me')}>
-              <Text style={styles.text}> Login</Text>
+             onPress={() => _navigator.push({title:'UserInfoView',id:'userinfo'})}>
+              <Text style={styles.text}> I am trainee</Text>
               </TouchableOpacity>
             </View>
         </View>
@@ -56,12 +57,16 @@ var PT = React.createClass({
        );
     }
 
-    if(route.id === 'shop'){
+    if(route.id === 'instructwelcome'){
       return (
-        <ShopView navigator={navigator} route={route} />
+        <InstructwelcomeView navigator={navigator} route={route} />
        );
     }
-
+    if(route.id === 'userinfo'){
+      return (
+        <UserInfoView navigator={navigator} route={route}/>
+      );
+    }
   
 
   },

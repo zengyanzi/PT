@@ -82,7 +82,7 @@ var ShopView = React.createClass({
         }}>
          
           <Text style={{ fontSize:18,  color:'#484848' }}>SHOP</Text>
-        
+      
         </View>
         <Image source= {{ uri: 'http://img.hb.aicdn.com/cbf3ebcae08ef62ef02dd61aa2407414dc64e794150313-KRUD1s_fw658' }}
           style={{ height: 220, margin: 20}}  />
