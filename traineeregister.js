@@ -11,8 +11,22 @@ import {
   BackAndroid,
   ScrollView,
   TouchableOpacity,
+  TouchableHighlight,
   navigator,
 } from 'react-native';
+import t from 'tcomb-form-native';
+var Form =t.form.Form;
+
+var Person = t.struct({
+  Name: t.String,              // a required string
+  Surname: t.maybe(t.String),  // an optional string
+  age: t.Number,               // a required number
+  Phone:t.Number,               // a required number
+  Gym: t.String,              // a required string
+  rememberMe: t.Boolean        // a boolean
+});
+
+var options = {}; // optional rendering options (see documentation)
 
 BackAndroid.addEventListener('hardwareBackPress', function() {
   if(_navigator == null){
@@ -37,33 +51,28 @@ var TraineeregisterView = React.createClass({
     };
   },
 
-  render: function(){
+ render: function(){
     return (
-          <ScrollView 
-        contentContainerStyle={{flex:1}}
-        keyboardDismissMode='on-drag'
-        keyboardShouldPersistTaps={false}
-      >
-        
-       <View style={styles.container}>
+      <ScrollView 
+            contentContainerStyle={{flex:1}}
+            keyboardDismissMode='on-drag'
+            keyboardShouldPersistTaps={false} >
+
+ 
+        <View style={styles.container}>
           <View style={styles.Top}>
            <Text style={styles.WelcomeText}>Welcome to Virtual PT</Text>
           </View>
-       </View>
-       <View style={styles.maincontain}>
-         <Image
-              source={{uri: 'http://oss-hz.qianmi.com/qianmicom/u/cms/qmwww/201511/03102524l6ur.png'}}
-              style={styles.logo}/>
-
-            <View style={styles.choose}>
-              <TouchableOpacity style={styles.btn}
-              onPress={() => _navigator.push({title:'InstructwelcomeView',id:'instructwelcome'})}>
-              <Text style={styles.text}>vincent</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.btn}
-             onPress={() => _navigator.push({title:'UserInfoView',id:'userinfo'})}>
-              <Text style={styles.text}> Login</Text>
-              </TouchableOpacity>
+        </View>
+        <View style={styles.maincontain}>
+            <View>
+              <Form
+                ref="form"
+                type={Person}
+                options={options}/>
+              <TouchableHighlight style={styles.button} onPress={() => _navigator.push({title:'UserInfoView',id:'userinfo'})} underlayColor='#99d9f4'>
+                <Text style={styles.buttonText}>Save</Text>
+              </TouchableHighlight>
             </View>
         </View>
       </ScrollView>
@@ -88,37 +97,37 @@ var styles = StyleSheet.create({
     borderWidth: 2,
     borderBottomColor:'#b8a6b0',
   },
-  maincontain:
+ maincontain:
   {
     flex: 10,
     paddingLeft: 10,
     paddingRight: 10,
     backgroundColor: '#F4FCFF',
     justifyContent: 'center',
-    alignItems: 'center',
-  },
+ },
    logo:{
     width:160,
     height:160,
   },
-  choose:{
-    flexDirection:'row'
-  },
-  btn:{
-     alignSelf: 'stretch',
-     alignItems: 'center',
-     justifyContent: 'center',
-     backgroundColor: '#80b8e4',
-     height: 40,
-     borderRadius: 5,
-     width:100,
-     marginTop: 100,
-     marginLeft:20,
-  },
   text:{
     fontWeight: 'bold',
     fontSize: 14,
-    color: '#FFF'
+    color: '#241003',
+  },
+   buttonText: {
+    fontSize: 18,
+    color: 'white',
+    alignSelf: 'center'
+  },
+  button: {
+    height: 36,
+    backgroundColor: '#48BBEC',
+    borderColor: '#48BBEC',
+    borderWidth: 1,
+    borderRadius: 8,
+    marginBottom: 10,
+    alignSelf: 'stretch',
+    justifyContent: 'center'
   },
 });
 
