@@ -10,6 +10,7 @@ import {
   ViewPagerAndroid,
   BackAndroid,
   ScrollView,
+  TextInput,
   TouchableOpacity,
 } from 'react-native';
 
@@ -35,33 +36,40 @@ var InstructloginView = React.createClass({
 
     };
   },
-
+  
   render: function(){
     return (
-          <ScrollView 
+      <ScrollView 
         contentContainerStyle={{flex:1}}
         keyboardDismissMode='on-drag'
         keyboardShouldPersistTaps={false}
       >
         
-       <View style={styles.container}>
+        <View style={styles.container}>
           <View style={styles.Top}>
            <Text style={styles.WelcomeText}>Welcome to Virtual PT</Text>
           </View>
-       </View>
-       <View style={styles.maincontain}>
-         <Image
+        </View>
+        <View style={styles.maincontain}>
+        <Image
               source={{uri: 'http://oss-hz.qianmi.com/qianmicom/u/cms/qmwww/201511/03102524l6ur.png'}}
               style={styles.logo}/>
+        <TextInput 
+            ref={(username) => this.username = username}
+            onFocus={()=>this.username.focus()}
+            style={styles.input}
+            placeholder='username'/>
+        <TextInput 
+            ref={(password) => this.password = password}
+            onFocus={() => this.password.focus()}
+            style={styles.input}
+            placeholder='password' 
+            password={true}/>
 
-            <View style={styles.choose}>
+         <View style={styles.choose}>
               <TouchableOpacity style={styles.btn}
               onPress={() => _navigator.push({title:'InstructwelcomeView',id:'instructwelcome'})}>
-              <Text style={styles.text}>Jenny</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.btn}
-             onPress={() => _navigator.push({title:'UserInfoView',id:'userinfo'})}>
-              <Text style={styles.text}> Login</Text>
+              <Text style={styles.text}>Login</Text>
               </TouchableOpacity>
             </View>
         </View>
@@ -107,7 +115,7 @@ var styles = StyleSheet.create({
      alignSelf: 'stretch',
      alignItems: 'center',
      justifyContent: 'center',
-     backgroundColor: '#80b8e4',
+     backgroundColor: '#1e1e52',
      height: 40,
      borderRadius: 5,
      width:100,
@@ -118,6 +126,14 @@ var styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 14,
     color: '#FFF'
+  },
+   input: {
+   height: 40,
+   width:200,
+   marginTop: 10, //间隔
+   borderWidth: 1, 
+   borderRadius: 5, //圆角
+   borderColor: 'lightblue'
   },
 });
 

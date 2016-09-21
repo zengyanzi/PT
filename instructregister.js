@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 
 import {
-   Image,
+  Image,
   View,
   Text,
   StyleSheet,
@@ -15,15 +15,17 @@ import {
 } from 'react-native';
 
 import t from 'tcomb-form-native';
+//import Storage from 'react-native-storage';
 
 var Form =t.form.Form;
 
 var Person = t.struct({
-  Name: t.String,              // a required string
-  Surname: t.maybe(t.String),  // an optional string
+  name: t.String,              // a required string
+  //surname: t.maybe(t.String),  // an optional string
   age: t.Number,               // a required number
-  Phone:t.Number,               // a required number
-  Gym: t.String,              // a required string
+  phone:t.Number,               // a required number
+  password:t.String,
+  gym: t.String,              // a required string
   rememberMe: t.Boolean        // a boolean
 });
 
@@ -41,7 +43,7 @@ BackAndroid.addEventListener('hardwareBackPress', function() {
   return true;
 });
 
-var _navigator ;
+
 
 
 var InstructregisterView = React.createClass({
@@ -52,6 +54,32 @@ var InstructregisterView = React.createClass({
 
     };
   },
+
+   onPress: function () {
+
+    var value = this.refs.form.getValue();
+    var name = value["name"];
+    var surname = value["surname"];
+    var age = value["age"];
+    var phone = value["phone"];
+    var gym = value["gym"];
+    var password = value["password"];
+    var url = 'http://192.168.1.15:8080/pt_server/instructorregister.action';
+    url += '?name='+name+'&surname='+surname+'&age='+age+'&phone='+phone+'&gym='+gym+'&password='+password;
+    fetch(url, {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    }).then(function(res){
+      console.log(res);
+    }).catch((error)=>{
+      console.log(error);
+    });
+
+  },
+
 
   render: function(){
     return (
@@ -72,7 +100,7 @@ var InstructregisterView = React.createClass({
                 ref="form"
                 type={Person}
                 options={options}/>
-              <TouchableHighlight style={styles.button} onPress={() => _navigator.push({title:'UserInfoView',id:'userinfo'})} underlayColor='#99d9f4'>
+              <TouchableHighlight style={styles.button} onPress={this.onPress} underlayColor='#99d9f4'>
                 <Text style={styles.buttonText}>Save</Text>
               </TouchableHighlight>
             </View>

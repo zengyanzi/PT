@@ -125,13 +125,13 @@ var styles = StyleSheet.create({
      backgroundColor: '#80b8e4',
      height: 40,
      borderRadius: 5,
-     width:100,
+     width:120,
      marginTop: 100,
      marginLeft:20,
   },
   text:{
     fontWeight: 'bold',
-    fontSize: 14,
+    fontSize: 16,
     color: '#FFF'
   },
 });

@@ -155,7 +155,7 @@ var styles = StyleSheet.create({
   },
   text:{
     fontWeight: 'bold',
-    fontSize: 14,
+    fontSize: 16,
     color: '#FFF'
   },
 });
