@@ -3,7 +3,7 @@
 import React,{Component} from 'react';
 import {AppRegistry} from 'react-native';
 
-var AwesomeProject = require('./home.js');
+var AwesomeProject = require('./pt/home.js');
 
 
 AppRegistry.registerComponent('test', () => AwesomeProject);

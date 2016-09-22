@@ -26,7 +26,7 @@ var Person = t.struct({
   phone:t.Number,               // a required number
   password:t.String,
   gym: t.String,              // a required string
-  rememberMe: t.Boolean        // a boolean
+  //rememberMe: t.Boolean        // a boolean
 });
 
 var options = {}; // optional rendering options (see documentation)
@@ -55,7 +55,7 @@ var InstructregisterView = React.createClass({
     };
   },
 
-   onPress: function () {
+   _register: function () {
 
     var value = this.refs.form.getValue();
     var name = value["name"];
@@ -64,7 +64,7 @@ var InstructregisterView = React.createClass({
     var phone = value["phone"];
     var gym = value["gym"];
     var password = value["password"];
-    var url = 'http://192.168.1.15:8080/pt_server/instructorregister.action';
+    var url = 'http://192.168.20.17:8080/pt_server/instructorregister.action';
     url += '?name='+name+'&surname='+surname+'&age='+age+'&phone='+phone+'&gym='+gym+'&password='+password;
     fetch(url, {
       method: 'GET',
@@ -74,9 +74,16 @@ var InstructregisterView = React.createClass({
       }
     }).then(function(res){
       console.log(res);
+
     }).catch((error)=>{
       console.log(error);
     });
+    _navigator.push({
+      title:'InstructloginView',
+      id:'instructlogin'
+    })
+
+
 
   },
 
@@ -100,8 +107,8 @@ var InstructregisterView = React.createClass({
                 ref="form"
                 type={Person}
                 options={options}/>
-              <TouchableHighlight style={styles.button} onPress={this.onPress} underlayColor='#99d9f4'>
-                <Text style={styles.buttonText}>Save</Text>
+              <TouchableHighlight style={styles.button} onPress={this._register} underlayColor='#99d9f4'>
+                <Text style={styles.buttonText}>Register</Text>
               </TouchableHighlight>
             </View>
         </View>
@@ -151,7 +158,7 @@ var styles = StyleSheet.create({
   },
   button: {
     height: 36,
-    backgroundColor: '#48BBEC',
+    backgroundColor: '#d7499a',
     borderColor: '#48BBEC',
     borderWidth: 1,
     borderRadius: 8,

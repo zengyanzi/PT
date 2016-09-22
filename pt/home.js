@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { AppRegistry,ScrollView,View,Text,Image,Navigator,TouchableOpacity,StyleSheet} from 'react-native';
 
 var _navigator;
-var InstructwelcomeView = require('./pt/instructwelcome.js');
-var TraineewelcomeView = require('./pt/traineewelcome.js');
+var InstructwelcomeView = require('./instructwelcome.js');
+var TraineewelcomeView = require('./traineewelcome.js');
 
 // class PT extends React.Component {
 var PT = React.createClass({
