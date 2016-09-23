@@ -16,10 +16,10 @@ import {
 
 import t from 'tcomb-form-native';
 //import Storage from 'react-native-storage';
-
+var _navigator ;
 var Form =t.form.Form;
 
-var Person = t.struct({
+var User = t.struct({
   name: t.String,              // a required string
   //surname: t.maybe(t.String),  // an optional string
   age: t.Number,               // a required number
@@ -29,7 +29,15 @@ var Person = t.struct({
   //rememberMe: t.Boolean        // a boolean
 });
 
-var options = {}; // optional rendering options (see documentation)
+var options = {
+   fields: {
+    password: {
+      password: true,
+      secureTextEntry: true,
+    }
+  }
+}; // optional rendering options (see documentation)
+
 
 
 BackAndroid.addEventListener('hardwareBackPress', function() {
@@ -42,7 +50,6 @@ BackAndroid.addEventListener('hardwareBackPress', function() {
   _navigator.pop();
   return true;
 });
-
 
 
 
@@ -96,16 +103,12 @@ var InstructregisterView = React.createClass({
             keyboardShouldPersistTaps={false} >
 
  
-        <View style={styles.container}>
-          <View style={styles.Top}>
-           <Text style={styles.WelcomeText}>Welcome to Virtual PT</Text>
-          </View>
-        </View>
+      
         <View style={styles.maincontain}>
             <View>
               <Form
                 ref="form"
-                type={Person}
+                type={User}
                 options={options}/>
               <TouchableHighlight style={styles.button} onPress={this._register} underlayColor='#99d9f4'>
                 <Text style={styles.buttonText}>Register</Text>

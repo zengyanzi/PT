@@ -30,7 +30,7 @@ BackAndroid.addEventListener('hardwareBackPress', function() {
   return true;
 });
 
-var _navigator ;
+
 
 
 var InstructwelcomeView = React.createClass({
@@ -59,7 +59,7 @@ var InstructwelcomeView = React.createClass({
         
        <View style={styles.container}>
           <View style={styles.Top}>
-           <Text style={styles.WelcomeText}>Welcome to Virtual PT</Text>
+           <Text style={styles.WelcomeText}>Welcome to Register</Text>
           </View>
        </View>
        <View style={styles.maincontain}>
