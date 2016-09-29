@@ -15,7 +15,7 @@ var _navigator;
 // var HttpView = require('./http.js');
 var ShopView = require('./shop.android.js');
 // var ViewPager = require('./viewpager.android.js');
-// var UserInfoView = require('./userinfo.js');
+var UserInfoView = require('./userinfo.js');
 // var NewsView = require('./news.js');
 
 var AwesomeProject = React.createClass({

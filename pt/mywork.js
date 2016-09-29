@@ -3,21 +3,18 @@ import React, { Component } from 'react';
 
 
 import {
-  Image,
+   Image,
   View,
   Text,
   StyleSheet,
   ViewPagerAndroid,
   BackAndroid,
   ScrollView,
-  TouchableOpacity,
   Navigator,
+  TextInput,
+  TouchableOpacity,
+  ListView,
 } from 'react-native';
-
-//navigation
-var _navigator;
-var InstructregisterView = require('./instructregister.js');
-var InstructloginView = require('./instructlogin.js');
 
 BackAndroid.addEventListener('hardwareBackPress', function() {
   if(_navigator == null){
@@ -30,7 +27,9 @@ BackAndroid.addEventListener('hardwareBackPress', function() {
   return true;
 });
 
-var InstructwelcomeView = React.createClass({
+var _navigator ;
+
+var MyworkView = React.createClass({
 
   getInitialState: function(){
     _navigator = this.props.navigator;
@@ -39,39 +38,43 @@ var InstructwelcomeView = React.createClass({
     };
   },
 
-  render: function(){
-    return (
-          <ScrollView 
+  
+ render: function(){
+   return (
+      <ScrollView 
         contentContainerStyle={{flex:1}}
         keyboardDismissMode='on-drag'
-        keyboardShouldPersistTaps={false}
-      >
+        keyboardShouldPersistTaps={false}>
         
        <View style={styles.container}>
           <View style={styles.Top}>
-           <Text style={styles.WelcomeText}>Welcome to I</Text>
+           <Text style={styles.WelcomeText}>My Workout</Text>
           </View>
        </View>
-       <View style={styles.maincontain}>
-         <Image
-              source={{uri: 'http://oss-hz.qianmi.com/qianmicom/u/cms/qmwww/201511/03102524l6ur.png'}}
-              style={styles.logo}/>
 
-            <View style={styles.choose}>
-              <TouchableOpacity style={styles.btn}
-              onPress={() => _navigator.push({title:'InstructregisterView',id:'instructregister'})}>
-              <Text style={styles.text}>Register</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.btn}
-             onPress={() => _navigator.push({title:'InstructloginView',id:'instructlogin'})}>
-              <Text style={styles.text}> Login</Text>
-              </TouchableOpacity>
-            </View>
+       <View style={styles.maincontain}>
+          <TouchableOpacity onPress={() => _navigator.push({title:'MysessionView',id:'mysession'})}>
+            <Image 
+                source={require('../img/mywork.png')}
+                style={styles.choice}/>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => _navigator.push({title:'traineeregister',id:'traineeregister'})}>
+            <Image 
+                source={require('../img/myrecord.png')}
+                style={styles.choice}/>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => _navigator.push({title:'traineeregister',id:'traineeregister'})}>
+            <Image 
+                source={require('../img/mydiet.png')}
+                style={styles.choice}/>
+          </TouchableOpacity>          
         </View>
       </ScrollView>
-    );
+       );
   }
+
 });
+
 var styles = StyleSheet.create({
   container:{
     flex: 1,
@@ -90,6 +93,7 @@ var styles = StyleSheet.create({
     borderWidth: 2,
     borderBottomColor:'#b8a6b0',
   },
+
   maincontain:
   {
     flex: 10,
@@ -98,12 +102,20 @@ var styles = StyleSheet.create({
     backgroundColor: '#F4FCFF',
     justifyContent: 'center',
     alignItems: 'center',
+    flexDirection:'column',
   },
-   logo:{
-    width:160,
-    height:160,
+  choice:{
+    marginTop:10,
   },
-  choose:{
+  input: {
+   height: 40,
+   width:200,
+   marginTop: 10, //间隔
+   borderWidth: 1, 
+   borderRadius: 5, //圆角
+   borderColor: 'lightblue'
+  },
+    choose:{
     flexDirection:'row'
   },
   btn:{
@@ -117,11 +129,6 @@ var styles = StyleSheet.create({
      marginTop: 100,
      marginLeft:20,
   },
-  text:{
-    fontWeight: 'bold',
-    fontSize: 16,
-    color: '#FFF'
-  },
 });
 
-module.exports = InstructwelcomeView;
+module.exports = MyworkView;

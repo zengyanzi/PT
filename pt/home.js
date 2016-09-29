@@ -1,19 +1,30 @@
 import React, { Component } from 'react';
-import { AppRegistry,ScrollView,View,Text,Image,Navigator,TouchableOpacity,StyleSheet} from 'react-native';
+import { AppRegistry,ScrollView,View,Text,Image,Navigator,TouchableOpacity,BackAndroid,StyleSheet} from 'react-native';
 
 var _navigator;
 var InstructwelcomeView = require('./instructwelcome.js');
+var InstructloginView = require('./instructlogin.js');
+var InstructregisterView= require('./instructregister.js');
 var TraineewelcomeView = require('./traineewelcome.js');
+var TraineeloginView =require('./traineelogin.js');
+var TraineeregisterView =require('./traineeregister.js');
+var ClientInfoView = require('./clientinfo.js');
+var MyworkView = require('./mywork.js');
+var MysessionView=require('./mysession.js');
+
 
 // class PT extends React.Component {
 var PT = React.createClass({
-    getInitialState: function(){
-    return {};
+   getInitialState: function(){
+    return {
+
+    };
   },
 
   configureScenceAndroid: function(){
     return Navigator.SceneConfigs.FadeAndroid;
   },
+
 
  renderSceneAndroid: function(route, navigator){
     _navigator = navigator;
@@ -62,12 +73,46 @@ var PT = React.createClass({
         <InstructwelcomeView navigator={navigator} route={route} />
        );
     }
+    if(route.id === 'instructlogin'){
+      return (
+        <InstructloginView navigator={navigator} route={route} />
+       );
+    }
+    if(route.id === 'instructregister'){
+      return (
+        <InstructregisterView navigator={navigator} route={route} />
+       );
+    }
     if(route.id === 'traineewelcome'){
       return (
         <TraineewelcomeView navigator={navigator} route={route}/>
       );
     }
-  
+    if(route.id === 'traineeregister'){
+      return (
+        <TraineeregisterView navigator={navigator} route={route}/>
+      );
+    }
+    if(route.id === 'traineelogin'){
+      return (
+        <TraineeloginView navigator={navigator} route={route}/>
+      );
+    }
+    if (route.id ==='clientinfo') {
+      return(
+        <ClientInfoView navigator={navigator} route={route}/>
+        );
+    }
+    if(route.id === 'mywork'){
+      return (
+        <MyworkView navigator={navigator} route={route}/>
+      );
+    }
+     if(route.id === 'mysession'){
+      return (
+        <MysessionView navigator={navigator} route={route}/>
+      );
+    }
 
   },
 

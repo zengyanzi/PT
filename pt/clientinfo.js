@@ -10,14 +10,11 @@ import {
   ViewPagerAndroid,
   BackAndroid,
   ScrollView,
-  TouchableOpacity,
   Navigator,
   TextInput,
+  TouchableOpacity,
+  ListView,
 } from 'react-native';
-
-//navigation
-var _navigator;
-
 
 BackAndroid.addEventListener('hardwareBackPress', function() {
   if(_navigator == null){
@@ -30,8 +27,10 @@ BackAndroid.addEventListener('hardwareBackPress', function() {
   return true;
 });
 
+var _navigator ;
+var TraineeregisterView = require('./traineeregister.js');
 
-var InstructloginView = React.createClass({
+var ClientInfoView = React.createClass({
 
   getInitialState: function(){
     _navigator = this.props.navigator;
@@ -39,48 +38,46 @@ var InstructloginView = React.createClass({
 
     };
   },
-  render: function(){
-    return (
-       <ScrollView 
+
+
+
+ render: function(){
+
+   return (
+      <ScrollView 
         contentContainerStyle={{flex:1}}
         keyboardDismissMode='on-drag'
-        keyboardShouldPersistTaps={false}
-      >
+        keyboardShouldPersistTaps={false}>
         
        <View style={styles.container}>
           <View style={styles.Top}>
-           <Text style={styles.WelcomeText}>Welcome to test</Text>
+           <Text style={styles.WelcomeText}>My Client</Text>
           </View>
        </View>
-       <View style={styles.maincontain}>
-         <Image
-              source={{uri: 'http://oss-hz.qianmi.com/qianmicom/u/cms/qmwww/201511/03102524l6ur.png'}}
-              style={styles.logo}/>
-            <TextInput 
-            ref={(username) => this.username = username}
-            onFocus={()=>this.username.focus()}
-            style={styles.input}
-            placeholder='username'/>
-           <TextInput 
-            ref={(password) => this.password = password}
-            onFocus={() => this.password.focus()}
-            style={styles.input}
-            placeholder='password' 
-            password={true}/>
 
-            <View style={styles.choose}>
+       <View style={styles.maincontain}>
+          <View style={styles.clientlist}>
+              <Text style={styles.clientname}>Jenny</Text>
+              <Text style={styles.clientstatueDisactivation}>Disactivation</Text>
+          </View>
+          <View style={styles.clientlist}>
+              <Text style={styles.clientname}>Jenny</Text>
+              <Text style={styles.clientstatueDisactivation}>Disactivation</Text>
+          </View>
+          <View style={styles.choose}>
               <TouchableOpacity style={styles.btn}
-              onPress={() => _navigator.push({title:'ClientInfoView',id:'clientinfo'})}>
-              <Text style={styles.text}>login</Text>
+              onPress={() => _navigator.push({title:'traineeregister',id:'traineeregister'})}>
+              <Text style={styles.text}>Add Client</Text>
               </TouchableOpacity>
 
-            </View>
+          </View>
         </View>
       </ScrollView>
-   );
+       );
   }
 
 });
+
 var styles = StyleSheet.create({
   container:{
     flex: 1,
@@ -99,6 +96,7 @@ var styles = StyleSheet.create({
     borderWidth: 2,
     borderBottomColor:'#b8a6b0',
   },
+
   maincontain:
   {
     flex: 10,
@@ -107,21 +105,51 @@ var styles = StyleSheet.create({
     backgroundColor: '#F4FCFF',
     justifyContent: 'center',
     alignItems: 'center',
+    flexDirection:'column',
   },
-   logo:{
-    width:160,
-    height:160,
+  clientlist:{
+     flexDirection:'row',
   },
-  choose:{
-    flexDirection:'row'
+
+  clientname:{
+    flex: 1,
+    height: 50,
+    fontWeight: 'bold',
+    fontSize: 18,
+    color: '#d7499a', 
+    borderWidth: 2,
+    textAlign: 'center',
+    marginTop:10,
+    borderBottomColor:'#b8a6b0',
   },
-   input: {
+  clientstatueactivate:{
+    flex: 1,
+    height:50,
+    textAlign: 'center',
+    backgroundColor: '#b8a6b0',
+    alignItems: 'center', 
+    marginTop:10,
+    justifyContent: 'center'
+  },
+  clientstatueDisactivation:{
+    flex: 1,
+    height:50,
+    textAlign: 'center',
+    backgroundColor: '#aaaaaa',
+    alignItems: 'center', 
+    marginTop:10,
+    justifyContent: 'center'
+  },
+  input: {
    height: 40,
    width:200,
    marginTop: 10, //间隔
    borderWidth: 1, 
    borderRadius: 5, //圆角
    borderColor: 'lightblue'
+  },
+    choose:{
+    flexDirection:'row'
   },
   btn:{
      alignSelf: 'stretch',
@@ -134,11 +162,6 @@ var styles = StyleSheet.create({
      marginTop: 100,
      marginLeft:20,
   },
-  text:{
-    fontWeight: 'bold',
-    fontSize: 16,
-    color: '#FFF'
-  },
 });
 
-module.exports = InstructloginView;
+module.exports = ClientInfoView;

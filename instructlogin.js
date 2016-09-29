@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 
 
 import {
-  Image,
+   Image,
   View,
   Text,
   StyleSheet,
@@ -12,12 +12,12 @@ import {
   ScrollView,
   TouchableOpacity,
   Navigator,
+  TextInput,
 } from 'react-native';
 
 //navigation
 var _navigator;
-var InstructregisterView = require('./instructregister.js');
-var InstructloginView = require('./instructlogin.js');
+var ClientInfoView = require('./clientinfo.js');
 
 BackAndroid.addEventListener('hardwareBackPress', function() {
   if(_navigator == null){
@@ -30,7 +30,10 @@ BackAndroid.addEventListener('hardwareBackPress', function() {
   return true;
 });
 
-var InstructwelcomeView = React.createClass({
+
+
+
+var InstructloginView = React.createClass({
 
   getInitialState: function(){
     _navigator = this.props.navigator;
@@ -39,7 +42,14 @@ var InstructwelcomeView = React.createClass({
     };
   },
 
-  render: function(){
+  configureScenceAndroid: function(){
+    return Navigator.SceneConfigs.FadeAndroid;
+  },
+
+
+ renderSceneAndroid: function(route, navigator){
+    _navigator = navigator;
+    if(route.id === 'instructlogin'){
     return (
           <ScrollView 
         contentContainerStyle={{flex:1}}
@@ -49,28 +59,57 @@ var InstructwelcomeView = React.createClass({
         
        <View style={styles.container}>
           <View style={styles.Top}>
-           <Text style={styles.WelcomeText}>Welcome to I</Text>
+           <Text style={styles.WelcomeText}>Welcome to test</Text>
           </View>
        </View>
        <View style={styles.maincontain}>
          <Image
               source={{uri: 'http://oss-hz.qianmi.com/qianmicom/u/cms/qmwww/201511/03102524l6ur.png'}}
               style={styles.logo}/>
+            <TextInput 
+            ref={(username) => this.username = username}
+            onFocus={()=>this.username.focus()}
+            style={styles.input}
+            placeholder='username'/>
+           <TextInput 
+            ref={(password) => this.password = password}
+            onFocus={() => this.password.focus()}
+            style={styles.input}
+            placeholder='password' 
+            password={true}/>
 
             <View style={styles.choose}>
               <TouchableOpacity style={styles.btn}
-              onPress={() => _navigator.push({title:'InstructregisterView',id:'instructregister'})}>
-              <Text style={styles.text}>Register</Text>
+              onPress={() => _navigator.push({title:'ClientInfoView',id:'clientinfo'})}>
+              <Text style={styles.text}>login</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.btn}
-             onPress={() => _navigator.push({title:'InstructloginView',id:'instructlogin'})}>
-              <Text style={styles.text}> Login</Text>
-              </TouchableOpacity>
+
             </View>
         </View>
       </ScrollView>
-    );
+       );
+    }
+    if(route.id === 'clientinfo'){
+      return (
+        <ClientInfoView navigator={navigator} route={route}/>
+      );
+    }
+  
+
+  },
+
+ render: function(){
+    var renderScene = this.renderSceneAndroid;
+    var configureScence = this.configureScenceAndroid;
+    return (
+      <Navigator
+        debugOverlay={false}
+        initialRoute={{ title: 'instructlogin', id:'instructlogin'}}
+        configureScence={{ configureScence }}
+        renderScene={renderScene}/>
+   );
   }
+
 });
 var styles = StyleSheet.create({
   container:{
@@ -106,6 +145,14 @@ var styles = StyleSheet.create({
   choose:{
     flexDirection:'row'
   },
+   input: {
+   height: 40,
+   width:200,
+   marginTop: 10, //间隔
+   borderWidth: 1, 
+   borderRadius: 5, //圆角
+   borderColor: 'lightblue'
+  },
   btn:{
      alignSelf: 'stretch',
      alignItems: 'center',
@@ -124,4 +171,4 @@ var styles = StyleSheet.create({
   },
 });
 
-module.exports = InstructwelcomeView;
+module.exports = InstructloginView;

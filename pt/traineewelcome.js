@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 
 
 import {
-   Image,
+  Image,
   View,
   Text,
   StyleSheet,
@@ -17,7 +17,7 @@ import {
 //navigation
 var _navigator;
 var TraineeregisterView = require('./traineeregister.js');
-var InstructloginView = require('./instructlogin.js');
+var TraineeloginView = require('./traineelogin.js');
 
 BackAndroid.addEventListener('hardwareBackPress', function() {
   if(_navigator == null){
@@ -30,8 +30,6 @@ BackAndroid.addEventListener('hardwareBackPress', function() {
   return true;
 });
 
-var _navigator ;
-
 
 var TraineewelcomeView = React.createClass({
 
@@ -42,15 +40,10 @@ var TraineewelcomeView = React.createClass({
     };
   },
 
-  configureScenceAndroid: function(){
-    return Navigator.SceneConfigs.FadeAndroid;
-  },
 
+ render: function(){
 
- renderSceneAndroid: function(route, navigator){
-    _navigator = navigator;
-    if(route.id === 'traineewelcome'){
-    return (
+     return (
           <ScrollView 
         contentContainerStyle={{flex:1}}
         keyboardDismissMode='on-drag'
@@ -59,7 +52,7 @@ var TraineewelcomeView = React.createClass({
         
        <View style={styles.container}>
           <View style={styles.Top}>
-           <Text style={styles.WelcomeText}>Welcome to Virtual PT</Text>
+           <Text style={styles.WelcomeText}>Trainee to Virtual PT</Text>
           </View>
        </View>
        <View style={styles.maincontain}>
@@ -73,38 +66,13 @@ var TraineewelcomeView = React.createClass({
               <Text style={styles.text}>Register</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.btn}
-             onPress={() => _navigator.push({title:'InstructloginView',id:'instructlogin'})}>
+             onPress={() => _navigator.push({title:'TraineeloginView',id:'traineelogin'})}>
               <Text style={styles.text}> Login</Text>
               </TouchableOpacity>
             </View>
         </View>
       </ScrollView>
        );
-    }
-    if(route.id === 'traineeregister'){
-      return (
-        <TraineeregisterView navigator={navigator} route={route} />
-       );
-    }
-    if(route.id === 'instructlogin'){
-      return (
-        <InstructloginView navigator={navigator} route={route}/>
-      );
-    }
-  
-
-  },
-
- render: function(){
-    var renderScene = this.renderSceneAndroid;
-    var configureScence = this.configureScenceAndroid;
-    return (
-      <Navigator
-        debugOverlay={false}
-        initialRoute={{ title: 'traineewelcome', id:'traineewelcome'}}
-        configureScence={{ configureScence }}
-        renderScene={renderScene}/>
-   );
   }
 
 });

@@ -101,9 +101,6 @@ var InstructregisterView = React.createClass({
             contentContainerStyle={{flex:1}}
             keyboardDismissMode='on-drag'
             keyboardShouldPersistTaps={false} >
-
- 
-      
         <View style={styles.maincontain}>
             <View>
               <Form

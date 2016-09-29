@@ -76,6 +76,7 @@ var TraineeregisterView = React.createClass({
     var gym = value["gym"];
     var password = value["password"];
     var instructor = value["instructor"];
+    var gender= value["Gender"];
     var url = 'http://192.168.20.17:8080/pt_server/traineeregister.action';
     url += '?name='+name+'&surname='+surname+'&age='+age+'&phone='+phone+'&gym='+gym+'&password='+password;
     fetch(url, {
