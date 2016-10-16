@@ -16,6 +16,7 @@ import {
   ListView,
 } from 'react-native';
 
+
 BackAndroid.addEventListener('hardwareBackPress', function() {
   if(_navigator == null){
     return false;
@@ -28,8 +29,9 @@ BackAndroid.addEventListener('hardwareBackPress', function() {
 });
 
 var _navigator ;
+var TraineeregisterView = require('./traineeregister.js');
 
-var MyworkView = React.createClass({
+var PlanView = React.createClass({
 
   getInitialState: function(){
     _navigator = this.props.navigator;
@@ -38,8 +40,10 @@ var MyworkView = React.createClass({
     };
   },
 
-  
+
+
  render: function(){
+
    return (
       <ScrollView 
         contentContainerStyle={{flex:1}}
@@ -48,26 +52,30 @@ var MyworkView = React.createClass({
         
        <View style={styles.container}>
           <View style={styles.Top}>
-           <Text style={styles.WelcomeText}>My Workout</Text>
+           <Text style={styles.WelcomeText}>Manage Plan</Text>
           </View>
        </View>
 
        <View style={styles.maincontain}>
-          <TouchableOpacity onPress={() => _navigator.push({title:'MysessionView',id:'mysession'})}>
-            <Image 
-                source={require('../img/mywork.png')}
-                style={styles.choice}/>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => _navigator.push({title:'MyrecordView',id:'myrecord'})}>
-            <Image 
-                source={require('../img/myrecord.png')}
-                style={styles.choice}/>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => _navigator.push({title:'traineeregister',id:'traineeregister'})}>
-            <Image 
-                source={require('../img/mydiet.png')}
-                style={styles.choice}/>
-          </TouchableOpacity>          
+          <View style={styles.clientlist}>
+              <Text style={styles.clientname}>Jenny</Text>
+              <Text style={styles.clientstatueDisactivation}>Disactivation</Text>
+          </View>
+          <View style={styles.clientlist}>
+              <Text style={styles.clientname}>Vincent</Text>
+              <Text style={styles.clientstatueDisactivation}>Disactivation</Text>
+          </View>
+          <View style={styles.choose}>
+              <TouchableOpacity style={styles.btn}
+              onPress={() => _navigator.push({title:'traineeregister',id:'traineeregister'})}>
+              <Text style={styles.text}>Add Client</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.btn}
+              onPress={() => _navigator.push({title:'traineeregister',id:'traineeregister'})}>
+              <Text style={styles.text}>Add plan</Text>
+              </TouchableOpacity>
+
+          </View>
         </View>
       </ScrollView>
        );
@@ -104,8 +112,38 @@ var styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection:'column',
   },
-  choice:{
+  clientlist:{
+     flexDirection:'row',
+  },
+
+  clientname:{
+    flex: 1,
+    height: 50,
+    fontWeight: 'bold',
+    fontSize: 18,
+    color: '#d7499a', 
+    borderWidth: 2,
+    textAlign: 'center',
     marginTop:10,
+    borderBottomColor:'#b8a6b0',
+  },
+  clientstatueactivate:{
+    flex: 1,
+    height:50,
+    textAlign: 'center',
+    backgroundColor: '#b8a6b0',
+    alignItems: 'center', 
+    marginTop:10,
+    justifyContent: 'center'
+  },
+  clientstatueDisactivation:{
+    flex: 1,
+    height:50,
+    textAlign: 'center',
+    backgroundColor: '#aaaaaa',
+    alignItems: 'center', 
+    marginTop:10,
+    justifyContent: 'center'
   },
   input: {
    height: 40,
@@ -131,4 +169,4 @@ var styles = StyleSheet.create({
   },
 });
 
-module.exports = MyworkView;
+module.exports = PlanView;

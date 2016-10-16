@@ -13,12 +13,26 @@ import {
   TouchableOpacity,
   Navigator,
   TextInput,
+  Alert
 } from 'react-native';
-
+import t from 'tcomb-form-native';
 //navigation
 var _navigator;
+var Form =t.form.Form;
+var User = t.struct({
+  phone: t.String,              // a required string
+  password:t.String,
+  //rememberMe: t.Boolean        // a boolean
+});
 
-
+var options = {
+   fields: {
+    password: {
+      password: true,
+      secureTextEntry: true,
+    },
+  }
+}; // optional rendering options (see documentation)
 BackAndroid.addEventListener('hardwareBackPress', function() {
   if(_navigator == null){
     return false;
@@ -39,6 +53,27 @@ var InstructloginView = React.createClass({
 
     };
   },
+
+   _login:function(){
+    var value = this.refs.form.getValue();
+    var phone = value["phone"];
+    var password=value["password"];
+    var url = 'http://192.168.1.15:8080/pt_server/instructorlogin.action';
+    url += '?phone='+phone+'&password='+password;
+    fetch(url).then(function(response) {  
+          return response.json();
+        }).then(function(res) {
+        console.log(res);
+          if (res["data"]!=null) {
+            _navigator.push({
+              title:'ClientInfoView',
+              id:'clientinfo'
+            });
+        }else{
+        Alert.alert('Fail to login','Please check your password');  
+        }
+      });
+  },
   render: function(){
     return (
        <ScrollView 
@@ -56,21 +91,14 @@ var InstructloginView = React.createClass({
          <Image
               source={{uri: 'http://oss-hz.qianmi.com/qianmicom/u/cms/qmwww/201511/03102524l6ur.png'}}
               style={styles.logo}/>
-            <TextInput 
-            ref={(username) => this.username = username}
-            onFocus={()=>this.username.focus()}
-            style={styles.input}
-            placeholder='username'/>
-           <TextInput 
-            ref={(password) => this.password = password}
-            onFocus={() => this.password.focus()}
-            style={styles.input}
-            placeholder='password' 
-            password={true}/>
+              <Form
+                ref="form"
+                type={User}
+                options={options}/>
 
             <View style={styles.choose}>
               <TouchableOpacity style={styles.btn}
-              onPress={() => _navigator.push({title:'ClientInfoView',id:'clientinfo'})}>
+              onPress={this._login}>
               <Text style={styles.text}>login</Text>
               </TouchableOpacity>
 

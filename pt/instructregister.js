@@ -11,21 +11,22 @@ import {
   ScrollView,
   TouchableOpacity,
   TouchableHighlight,
+  DatePickerAndroid,
   navigator
 } from 'react-native';
 
 import t from 'tcomb-form-native';
+import DatePicker from './date.js';
+
 //import Storage from 'react-native-storage';
 var _navigator ;
 var Form =t.form.Form;
 
 var User = t.struct({
   name: t.String,              // a required string
-  //surname: t.maybe(t.String),  // an optional string
-  age: t.Number,               // a required number
+  surname: t.maybe(t.String),  // an optional string
   phone:t.Number,               // a required number
   password:t.String,
-  gym: t.String,              // a required string
   //rememberMe: t.Boolean        // a boolean
 });
 
@@ -34,9 +35,10 @@ var options = {
     password: {
       password: true,
       secureTextEntry: true,
-    }
+    },
   }
 }; // optional rendering options (see documentation)
+
 
 
 
@@ -67,12 +69,12 @@ var InstructregisterView = React.createClass({
     var value = this.refs.form.getValue();
     var name = value["name"];
     var surname = value["surname"];
-    var age = value["age"];
     var phone = value["phone"];
-    var gym = value["gym"];
+    var birthday = this.state.date;
     var password = value["password"];
-    var url = 'http://192.168.20.17:8080/pt_server/instructorregister.action';
-    url += '?name='+name+'&surname='+surname+'&age='+age+'&phone='+phone+'&gym='+gym+'&password='+password;
+    
+    var url = 'http://192.168.1.15:8080/pt_server/instructorregister.action';
+    url += '?name='+name+'&surname='+surname+'&birthday='+birthday+'&phone='+phone+'&password='+password;
     fetch(url, {
       method: 'GET',
       headers: {
@@ -107,6 +109,16 @@ var InstructregisterView = React.createClass({
                 ref="form"
                 type={User}
                 options={options}/>
+              <Text style={styles.birthday}>Birthday</Text>
+              <DatePicker
+                style={styles.sportdate}
+                date={this.state.date}
+                mode="date"
+                placeholder="Date"
+                format="YYYY-MM-DD"
+                confirmBtnText="Confirm"
+                cancelBtnText="Cancel"
+                onDateChange={(date) => {this.setState({date: date});}}/>
               <TouchableHighlight style={styles.button} onPress={this._register} underlayColor='#99d9f4'>
                 <Text style={styles.buttonText}>Register</Text>
               </TouchableHighlight>
@@ -141,6 +153,11 @@ var styles = StyleSheet.create({
     paddingRight: 10,
     backgroundColor: '#F4FCFF',
     justifyContent: 'center',
+ },
+ birthday:{
+    fontWeight: 'bold',
+    fontSize: 16,
+    color: 'black',
  },
    logo:{
     width:160,

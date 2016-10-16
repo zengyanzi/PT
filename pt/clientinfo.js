@@ -61,13 +61,17 @@ var ClientInfoView = React.createClass({
               <Text style={styles.clientstatueDisactivation}>Disactivation</Text>
           </View>
           <View style={styles.clientlist}>
-              <Text style={styles.clientname}>Jenny</Text>
+              <Text style={styles.clientname}>Vincent</Text>
               <Text style={styles.clientstatueDisactivation}>Disactivation</Text>
           </View>
           <View style={styles.choose}>
               <TouchableOpacity style={styles.btn}
               onPress={() => _navigator.push({title:'traineeregister',id:'traineeregister'})}>
               <Text style={styles.text}>Add Client</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.btn}
+              onPress={() => _navigator.push({title:'traineeregister',id:'traineeregister'})}>
+              <Text style={styles.text}>Add plan</Text>
               </TouchableOpacity>
 
           </View>

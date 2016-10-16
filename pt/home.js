@@ -11,6 +11,8 @@ var TraineeregisterView =require('./traineeregister.js');
 var ClientInfoView = require('./clientinfo.js');
 var MyworkView = require('./mywork.js');
 var MysessionView=require('./mysession.js');
+var PlanView=require('./plan.js');
+
 
 
 // class PT extends React.Component {
@@ -108,11 +110,17 @@ var PT = React.createClass({
         <MyworkView navigator={navigator} route={route}/>
       );
     }
-     if(route.id === 'mysession'){
+    if(route.id === 'mysession'){
       return (
         <MysessionView navigator={navigator} route={route}/>
       );
     }
+    if(route.id === 'plan'){
+      return (
+        <PlanView navigator={navigator} route={route}/>
+      );
+    }
+
 
   },
 

@@ -14,8 +14,9 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native';
-
+import NavigatorBar from  'react-native-navbar';
 import DatePicker from './date.js';
+
 BackAndroid.addEventListener('hardwareBackPress', function() {
   if(_navigator == null){
     return false;
@@ -69,6 +70,20 @@ var MysessionView = React.createClass({
                 confirmBtnText="Confirm"
                 cancelBtnText="Cancel"
                 onDateChange={(date) => {this.setState({date: date});}}/>
+          </View>
+          <View style={styles.sportlist}>
+              <Text style={styles.sportname}>Weight Lifting</Text>
+              <Text style={styles.sportgoal}>20</Text>
+              <TextInput style={styles.sportact} placeholder='record'/>
+              <DatePicker
+                style={styles.sportdate}
+                date={this.state.datetime}
+                mode="date"
+                placeholder="Date"
+                format="YYYY-MM-DD"
+                confirmBtnText="Confirm"
+                cancelBtnText="Cancel"
+                onDateChange={(date) => {this.setState({datetime: date});}}/>
           </View>
             <View style={styles.choose}>
              <TouchableOpacity style={styles.btn}
